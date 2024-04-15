@@ -1,0 +1,38 @@
+<!-- applicationContext.xml -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:property-placeholder location="classpath:discounts.properties" />
+
+    <bean id="shoppingCart" class="org.learning.spring.day1session1.ShoppingCart" scope="prototype" />
+
+    <bean id="casher" class="org.learning.spring.day1session1.Casher" init-method="openFile" destroy-method="closeFile">
+        <property name="fileName" value="checkout" />
+        <property name="path" value="checkout_files" />
+    </bean>
+
+    <!-- Battery Bean -->
+    <bean id="battery" class="org.learning.spring.day1session1.Battery">
+        <property name="productId" value="1" />
+        <property name="productName" value="AAA Battery" />
+        <property name="price" value="5.99" />
+        <property name="rechargeable" value="true" />
+        <property name="discount" value="${summer.discount}" />
+    </bean>
+
+    <!-- Disc Bean -->
+    <bean id="disc" class="org.learning.spring.day1session1.Disc">
+        <property name="productId" value="2" />
+        <property name="productName" value="DVD Disc" />
+        <property name="price" value="9.99" />
+        <property name="capacity" value="4.7" />
+        <property name="discount" value="${endofyear.discount}" />
+    </bean>
+
+</beans>
